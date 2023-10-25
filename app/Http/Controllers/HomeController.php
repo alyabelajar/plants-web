@@ -22,11 +22,11 @@ class HomeController extends Controller
         return view('items.article.what-we-do');
     }
     public function catalog (){
-        $post = Product::all();
-        return view('items.catalog', compact('post'));
+        $posts = Product::all();
+        return view('items.catalog', compact('posts'));
     }
 
-    
+
 
 }
 
