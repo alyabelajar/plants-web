@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Directory;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Product;
@@ -9,15 +10,17 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
-use Directory;
 
 class ProductResource extends Resource
 {
@@ -31,18 +34,19 @@ class ProductResource extends Resource
             ->schema([
                 Grid::make([
                     'default' => 1,
+                ])->schema([
+                            Section::make('')->schema([
+                                TextInput::make('name'),
+                                TextInput::make('price')
+                                    ->numeric(),
+                                SpatieMediaLibraryFileUpload::make('product')
+                                    ->collection('product'),
+                                TextInput::make('discount')
+                                    ->numeric(),
 
-                ])
-                    ->schema([
-                        TextInput::make('name'),
-                        TextInput::make('price')
-                         ->numeric(),
-                         FileUpload::make('image')
-                        ->directory('image'),
-                         TextInput::make('discount')
-                         ->numeric(),
+                            ])->columnSpan(1/2)
+                        ])
 
-                    ])
 
 
             ]);
@@ -53,9 +57,9 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('price'),
-                ImageColumn::make('image')
-                ->square()
+                TextColumn::make('price')->money('IDR'),
+                SpatieMediaLibraryImageColumn::make('product')
+                ->collection('product')
             ])
             ->filters([
                 //
