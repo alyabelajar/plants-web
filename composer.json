@@ -16,9 +16,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "*",
-        "spatie/image": "^2.2",
-        "spatie/laravel-medialibrary": "*",
-        "spatie/laravel-permission": "^6.0"
+        "spatie/laravel-medialibrary": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
