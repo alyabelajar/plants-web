@@ -6,6 +6,7 @@ use Directory;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Product;
+use Filament\Support\Enums\FontWeight;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -37,6 +38,7 @@ class ProductResource extends Resource
                 ])->schema([
                             Section::make('')->schema([
                                 TextInput::make('name'),
+                                TextInput::make('description'),
                                 TextInput::make('price')
                                     ->numeric(),
                                 SpatieMediaLibraryFileUpload::make('product')
@@ -56,10 +58,17 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('price')->money('IDR'),
+                TextColumn::make('name')
+                ->weight(FontWeight::Bold)
+                ->description(fn (Product $record): string => $record->description)
+                ->wrap( ),
+                TextColumn::make('price')
+                ->money('IDR'),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
+                ->width(95)
+                ->height(95),
+
             ])
             ->filters([
                 //
