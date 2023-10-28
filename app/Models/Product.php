@@ -13,7 +13,7 @@ class Product extends Model implements  HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['name', 'description', 'price', 'discount'];
+    protected $fillable = ['name', 'price', 'discount'];
 
     public function registerMediaConversions(Media $media = null): void
 {
@@ -23,5 +23,3 @@ class Product extends Model implements  HasMedia
         ->nonQueued();
 }
 }
-
-

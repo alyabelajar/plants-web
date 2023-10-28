@@ -4,6 +4,17 @@
 
 
 
+
+    <!--   🛑 Product card 1 - Ends Here  -->
+
+
+
+
+
+
+    <!-- source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html -->
+
+
     <!-- ✅ Grid Section - Starts Here 👇 -->
     <section id="Projects"
         class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
@@ -11,7 +22,7 @@
         @if ($posts->isNotEmpty())
 
         @foreach ($posts as $post)
-
+        <!--   ✅ Product card 1 - Starts Here 👇 -->
         <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <a href="#">
                @if ($post->hasMedia('product'))
@@ -39,14 +50,14 @@
                 </div>
             </a>
         </div>
-
+        <!--   🛑 Product card 1 - Ends Here  -->
     @endforeach
         @endif
 
 
     </section>
 
-
+    <!-- 🛑 Grid Section - Ends Here -->
 
 
 
