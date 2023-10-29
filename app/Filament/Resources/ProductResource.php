@@ -40,7 +40,8 @@ class ProductResource extends Resource
                                 TextInput::make('price')
                                     ->numeric(),
                                 SpatieMediaLibraryFileUpload::make('product')
-                                    ->collection('product'),
+                                    ->collection('product')
+                                    ->maxSize(2048),
                                 TextInput::make('discount')
                                     ->numeric(),
 
