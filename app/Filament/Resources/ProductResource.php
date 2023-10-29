@@ -57,7 +57,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('price')->money('IDR'),
+                TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
             ])
