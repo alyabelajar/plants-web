@@ -37,6 +37,7 @@ class ProductResource extends Resource
                 ])->schema([
                             Section::make('')->schema([
                                 TextInput::make('name'),
+                                TextInput::make('description'),
                                 TextInput::make('price')
                                     ->numeric(),
                                 SpatieMediaLibraryFileUpload::make('product')
@@ -57,10 +58,15 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                ->wrap()
+                ->description(fn (Product $record): string => $record->description),
                 TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
+                ->width(234)
+                ->height(234),
+                TextColumn::make('action')
             ])
             ->filters([
                 //

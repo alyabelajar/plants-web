@@ -13,7 +13,7 @@ class Product extends Model implements  HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['name', 'price', 'discount'];
+    protected $fillable = ['name', 'description', 'price', 'discount'];
 
     public function registerMediaConversions(Media $media = null): void
 {
