@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use Filament\Forms\Components\Textarea;
 
 class ProductResource extends Resource
 {
@@ -37,7 +38,7 @@ class ProductResource extends Resource
                 ])->schema([
                             Section::make('')->schema([
                                 TextInput::make('name'),
-                                TextInput::make('description'),
+                                Textarea::make('description'),
                                 TextInput::make('price')
                                     ->numeric(),
                                 SpatieMediaLibraryFileUpload::make('product')
