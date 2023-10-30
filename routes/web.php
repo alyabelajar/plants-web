@@ -31,6 +31,8 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/vision', 'vision')->name('vision');
     Route::get('/what', 'we_do')->name('what');
     Route::get('/catalog', 'catalog')->name('catalog');
+    Route::get('/product-detail', 'details')->name('catalog');
+
 
 });
 

@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('items.catalog', compact('posts'));
     }
 
+    public function details()
+    {
+        return view('items.product-details');
+    }
+
 
 
 }
