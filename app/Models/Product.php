@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -22,4 +23,9 @@ class Product extends Model implements  HasMedia
         ->fit(Manipulations::FIT_CROP, 300, 300)
         ->nonQueued();
 }
+
+    public function products(){
+        return $this->hasMany(Order::class);
+
+    }
 }
