@@ -64,7 +64,7 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                 ->wrap()
-                ->description(fn (Product $record): string => $record->description),
+                ->description(fn (Product $record) => $record?->description),
                 TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
@@ -77,6 +77,8 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

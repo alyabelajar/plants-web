@@ -11,4 +11,11 @@ class Role extends Model
 
     protected $fillable = ['name', 'guard_web'];
 
+    protected static function booted()
+    {
+        static::creating(function ($role) {
+            $role->guard_name = config('auth.defaults.guard');
+        });
+    }
+
 }

@@ -19,7 +19,7 @@ class Product extends Model implements  HasMedia
 {
     $this
         ->addMediaConversion('preview')
-        ->fit(Manipulations::FIT_CROP, 300, 300)
+        ->fit(Manipulations::FIT_CROP, 234, 234)
         ->nonQueued();
 }
 }
