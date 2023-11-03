@@ -29,6 +29,9 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
+    protected static ?string $navigationGroup = 'General';
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -61,7 +64,7 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                 ->wrap()
-                ->description(fn (Product $record): string => $record->description),
+                ->description(fn (Product $record) => $record?->description),
                 TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
@@ -74,6 +77,8 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
