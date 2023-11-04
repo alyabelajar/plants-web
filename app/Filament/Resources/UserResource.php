@@ -58,7 +58,7 @@ class UserResource extends Resource
                             ]),
                     ])
                     ->columnSpan(1 / 2),
-                Fieldset::make('')
+                Section::make('')
                     ->schema([
                         CheckboxList::make('roles')
                             ->options(function () {
