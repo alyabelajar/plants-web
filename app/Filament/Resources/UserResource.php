@@ -48,7 +48,7 @@ class UserResource extends Resource
                                         TextInput::make('password')
                                             ->password()
                                             ->confirmed()
-                                            ->visibleOn('create'),,
+                                            ->visibleOn('create'),
                                         TextInput::make('password_confirmation')
                                             ->password()
                                             ->visibleOn('create'),
