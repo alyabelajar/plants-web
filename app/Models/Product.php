@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order;
+use App\Models\Categories;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -28,4 +29,13 @@ class Product extends Model implements  HasMedia
         return $this->hasMany(Order::class);
 
     }
+
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class);
+    }
+
+
+
 }
