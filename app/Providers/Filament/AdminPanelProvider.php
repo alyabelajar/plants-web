@@ -6,7 +6,9 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationItem;
 use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
 use ChrisReedIO\Socialment\SocialmentPlugin;
@@ -37,9 +39,10 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
 
             ])
+
             ->navigationGroups([
                 NavigationGroup::make()
-                     ->label('General')
+                     ->label('Shop')
                      ->collapsed(false),
                 NavigationGroup::make()
                     ->label('Settings')
@@ -69,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->spa();
     }
 }

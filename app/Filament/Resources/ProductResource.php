@@ -27,9 +27,19 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
-    protected static ?string $navigationGroup = 'General';
+    protected static ?string $navigationGroup = 'Shop';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+{
+    return static::getModel()::count() <= 0 ? 'gray' : 'primary';
+}
 
 
     public static function form(Form $form): Form

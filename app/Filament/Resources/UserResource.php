@@ -22,6 +22,7 @@ use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class UserResource extends Resource
 {
@@ -41,6 +42,11 @@ class UserResource extends Resource
                             ->schema([
                                 Section::make('')
                                     ->schema([
+                                        SpatieMediaLibraryFileUpload::make('profile')
+                                        ->collection('profile')
+                                        ->avatar()
+                                        ->label('Profile')
+                                        ->alignCenter(),
                                         TextInput::make('name'),
                                         TextInput::make('email')
                                             ->email()
@@ -91,7 +97,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
