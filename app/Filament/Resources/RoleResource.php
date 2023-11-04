@@ -34,10 +34,8 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                ->columnSpanFull()
-                ->autocomplete(false),
-                Hidden::make('guard_name')
-                    ->default(config('auth.defaults.guard')),
+                    ->columnSpanFull()
+                    ->autocomplete(false),
             ]);
     }
 

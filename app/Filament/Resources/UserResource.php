@@ -48,16 +48,10 @@ class UserResource extends Resource
                                         TextInput::make('password')
                                             ->password()
                                             ->confirmed()
-                                            ->hidden(function(string $operation):bool{
-                                                return $operation === 'edit';
-
-                                            }),
+                                            ->visibleOn('create'),,
                                         TextInput::make('password_confirmation')
                                             ->password()
-                                            ->hidden(function(string $operation):bool{
-                                                return $operation === 'edit';
-
-                                            })
+                                            ->visibleOn('create'),
 
                                     ])
 
