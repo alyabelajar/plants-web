@@ -85,7 +85,15 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('email')
-                    ->icon('heroicon-m-envelope')
+                    ->icon('heroicon-m-envelope'),
+                TextColumn::make('roles.name')
+                ->badge()
+                ->color(fn(string $state):string => match($state){
+                    'Admin' => 'primary',
+                    'Product Manager' => 'gray',
+                    'Cashier' => 'info'
+                })
+
             ])
             ->filters([
                 //
