@@ -43,10 +43,11 @@ class UserResource extends Resource
                                 Section::make('')
                                     ->schema([
                                         SpatieMediaLibraryFileUpload::make('profile')
-                                        ->collection('profile')
-                                        ->avatar()
-                                        ->label('Profile')
-                                        ->alignCenter(),
+                                            ->collection('profile')
+                                            ->avatar()
+                                            ->label('Profile')
+                                            ->alignCenter()
+                                            ->image(),
                                         TextInput::make('name'),
                                         TextInput::make('email')
                                             ->email()
@@ -67,6 +68,7 @@ class UserResource extends Resource
                 Section::make('')
                     ->schema([
                         CheckboxList::make('roles')
+                            ->label('Assign Role')
                             ->options(function () {
                                 return Role::all()->pluck('name', 'name')->toArray();
                             })
@@ -87,12 +89,12 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->icon('heroicon-m-envelope'),
                 TextColumn::make('roles.name')
-                ->badge()
-                ->color(fn(string $state):string => match($state){
-                    'Admin' => 'primary',
-                    'Product Manager' => 'gray',
-                    'Cashier' => 'info'
-                })
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Admin' => 'primary',
+                        'Product Manager' => 'gray',
+                        'Cashier' => 'info'
+                    })
 
             ])
             ->filters([
