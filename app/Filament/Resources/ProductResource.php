@@ -46,21 +46,20 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make([
-                    'default' => 1,
-                ])->schema([
+                Grid::make(2)->schema([
                             Section::make('')->schema([
                                 TextInput::make('name'),
-                                Textarea::make('description'),
                                 TextInput::make('price')
-                                    ->numeric(),
+                                ->numeric(),
+                                TextInput::make('discount')
+                                ->numeric(),
+                                TextInput::make('description'),
                                 SpatieMediaLibraryFileUpload::make('product')
                                     ->collection('product')
-                                    ->maxSize(2048),
-                                TextInput::make('discount')
-                                    ->numeric(),
+                                    ->maxSize(2048)
+                                    ->columnSpanFull(),
 
-                            ])->columnSpan(1/2)
+                            ])->columns(2)
                         ])
 
 

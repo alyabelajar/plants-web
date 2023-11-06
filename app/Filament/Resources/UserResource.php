@@ -93,7 +93,7 @@ class UserResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'Admin' => 'primary',
                         'Product Manager' => 'gray',
-                        'Cashier' => 'info'
+                        'Cashier' => 'info',
                     })
 
             ])
