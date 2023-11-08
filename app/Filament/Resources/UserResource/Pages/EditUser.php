@@ -33,11 +33,16 @@ class EditUser extends EditRecord
 
         if(data_get($data, 'roles')){
             foreach (data_get($data, 'roles') as $role) {
-              $record->assignRole($role);
+              $record->syncRoles($role);
             }
 
         }
 
         return $record;
     }
+
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 }

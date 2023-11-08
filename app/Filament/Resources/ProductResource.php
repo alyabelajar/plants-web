@@ -27,30 +27,39 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
-    protected static ?string $navigationGroup = 'General';
+    protected static ?string $navigationGroup = 'Shop';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+{
+    return static::getModel()::count() <= 0 ? 'gray' : 'primary';
+}
 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Grid::make([
-                    'default' => 1,
-                ])->schema([
+                Grid::make(2)->schema([
                             Section::make('')->schema([
                                 TextInput::make('name'),
-                                Textarea::make('description'),
                                 TextInput::make('price')
-                                    ->numeric(),
+                                ->numeric(),
+                                TextInput::make('discount')
+                                ->numeric(),
+                                TextInput::make('description'),
                                 SpatieMediaLibraryFileUpload::make('product')
                                     ->collection('product')
-                                    ->maxSize(2048),
-                                TextInput::make('discount')
-                                    ->numeric(),
+                                    ->maxSize(2048)
+                                    ->columnSpanFull(),
 
-                            ])->columnSpan(1/2)
+                            ])->columns(2)
                         ])
 
 
@@ -64,7 +73,8 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                 ->wrap()
-                ->description(fn (Product $record) => $record?->description),
+                ->description(fn (Product $record) => $record?->description)
+                ->searchable(),
                 TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')

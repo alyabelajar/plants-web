@@ -22,6 +22,7 @@ use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class UserResource extends Resource
 {
@@ -41,6 +42,12 @@ class UserResource extends Resource
                             ->schema([
                                 Section::make('')
                                     ->schema([
+                                        SpatieMediaLibraryFileUpload::make('profile')
+                                            ->collection('profile')
+                                            ->avatar()
+                                            ->label('Profile')
+                                            ->alignCenter()
+                                            ->image(),
                                         TextInput::make('name'),
                                         TextInput::make('email')
                                             ->email()
@@ -58,9 +65,10 @@ class UserResource extends Resource
                             ]),
                     ])
                     ->columnSpan(1 / 2),
-                Fieldset::make('')
+                Section::make('')
                     ->schema([
                         CheckboxList::make('roles')
+                            ->label('Assign Role')
                             ->options(function () {
                                 return Role::all()->pluck('name', 'name')->toArray();
                             })
@@ -79,7 +87,15 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('email')
-                    ->icon('heroicon-m-envelope')
+                    ->icon('heroicon-m-envelope'),
+                TextColumn::make('roles.name')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Admin' => 'primary',
+                        'Product Manager' => 'gray',
+                        'Cashier' => 'info',
+                    })
+
             ])
             ->filters([
                 //
@@ -91,7 +107,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
