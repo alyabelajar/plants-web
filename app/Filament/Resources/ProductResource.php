@@ -11,18 +11,18 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ProductResource\Pages;
+use Filament\Tables\Actions\ActionGroup;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
-use Filament\Actions\ActionGroup;
-use Filament\Forms\Components\Textarea;
 
 class ProductResource extends Resource
 {
@@ -81,7 +81,6 @@ class ProductResource extends Resource
                 ->collection('product')
                 ->width(234)
                 ->height(234),
-                TextColumn::make('action')
             ])
             ->filters([
                 //
