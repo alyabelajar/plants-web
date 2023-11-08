@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\Textarea;
 
 class ProductResource extends Resource
@@ -86,8 +87,10 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
+                ActionGroup::make([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                ])
 
             ])
             ->bulkActions([
