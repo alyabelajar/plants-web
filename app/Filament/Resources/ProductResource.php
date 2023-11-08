@@ -73,7 +73,8 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                 ->wrap()
-                ->description(fn (Product $record) => $record?->description),
+                ->description(fn (Product $record) => $record?->description)
+                ->searchable(),
                 TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                 ->collection('product')
