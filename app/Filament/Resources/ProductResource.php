@@ -4,21 +4,23 @@ namespace App\Filament\Resources;
 
 use Directory;
 use Filament\Forms;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Tables;
 use App\Models\Product;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ProductResource\Pages;
-use Filament\Tables\Actions\ActionGroup;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -38,9 +40,9 @@ class ProductResource extends Resource
     }
 
     public static function getNavigationBadgeColor(): ?string
-{
-    return static::getModel()::count() <= 0 ? 'gray' : 'primary';
-}
+    {
+        return static::getModel()::count() <= 0 ? 'gray' : 'primary';
+    }
 
 
     public static function form(Form $form): Form
@@ -48,20 +50,24 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Grid::make(2)->schema([
-                            Section::make('')->schema([
-                                TextInput::make('name'),
-                                TextInput::make('price')
-                                ->numeric(),
-                                TextInput::make('discount')
-                                ->numeric(),
-                                TextInput::make('description'),
-                                SpatieMediaLibraryFileUpload::make('product')
-                                    ->collection('product')
-                                    ->maxSize(2048)
-                                    ->columnSpanFull(),
-
-                            ])->columns(2)
-                        ])
+                    Section::make('')->schema([
+                        TextInput::make('name'),
+                        TextInput::make('price')
+                            ->numeric(),
+                        TextInput::make('discount')
+                            ->numeric(),
+                        Select::make('category_id')
+                            ->relationship(name: 'category', titleAttribute: 'name')
+                            ->preload()
+                            ->searchable(),
+                        SpatieMediaLibraryFileUpload::make('product')
+                            ->collection('product')
+                            ->maxSize(2048)
+                            ->columnSpanFull(),
+                        MarkdownEditor::make('description')
+                            ->columnSpanFull(),
+                    ])->columns(2)
+                ])
 
 
 
@@ -73,22 +79,22 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                ->wrap()
-                ->description(fn (Product $record) => $record?->description)
-                ->searchable(),
-                TextColumn::make('price')->money(fn(string $state)=> "Rp.".number_format($state,2, ",", ".")),
+                    ->wrap()
+                    ->description(fn (Product $record) => $record?->description)
+                    ->searchable(),
+                TextColumn::make('price')->money(fn (string $state) => "Rp." . number_format($state, 2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
-                ->collection('product')
-                ->width(234)
-                ->height(234),
+                    ->collection('product')
+                    ->width(234)
+                    ->height(234),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 ActionGroup::make([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
                 ])
 
             ])
