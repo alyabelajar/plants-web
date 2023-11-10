@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CategoryResource\RelationManagers\CategoryRelationManager;
 use Directory;
 use Filament\Forms;
 use Filament\Tables;
@@ -26,7 +27,6 @@ use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Filament\Resources\ProductResource\RelationManagers;
 
 class ProductResource extends Resource
 {
@@ -119,7 +119,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoryRelationManager::class
         ];
     }
 
