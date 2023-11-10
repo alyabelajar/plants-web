@@ -40,9 +40,10 @@ class CategoryResource extends Resource
                     ->description('')
                     ->schema([
                         TextInput::make('name')
-                        ->live()
-                        ->afterStateUpdated(fn(Set $set, ?string $state)=> $set('slug', Str::slug($state))),
-                        TextInput::make('slug'),
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                        TextInput::make('slug')
+                            ->readOnly(),
                         Toggle::make('is_visible')
                             ->label('Visible to costumer'),
                         MarkdownEditor::make('description')
