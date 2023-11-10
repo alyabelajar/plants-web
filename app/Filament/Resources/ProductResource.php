@@ -2,13 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CategoryResource\RelationManagers\CategoryRelationManager;
 use Directory;
 use Filament\Forms;
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Tables;
 use App\Models\Product;
+use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -20,11 +22,11 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use App\Filament\Resources\ProductResource\RelationManagers;
 
 class ProductResource extends Resource
 {
@@ -59,7 +61,16 @@ class ProductResource extends Resource
                         Select::make('category_id')
                             ->relationship(name: 'category', titleAttribute: 'name')
                             ->preload()
-                            ->searchable(),
+                            ->searchable()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name')
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                Forms\Components\TextInput::make('slug')
+                                    ->readOnly(),
+                                Forms\Components\Toggle::make('is_visible'),
+                                Forms\Components\MarkdownEditor::make('description')
+                            ])->createOptionModalHeading('Create Category'),
                         SpatieMediaLibraryFileUpload::make('product')
                             ->collection('product')
                             ->maxSize(2048)
@@ -108,7 +119,7 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoryRelationManager::class
         ];
     }
 
