@@ -60,6 +60,7 @@ class ProductResource extends Resource
                             ->numeric(),
                         Select::make('category_id')
                             ->relationship(name: 'category', titleAttribute: 'name')
+                            ->required()
                             ->preload()
                             ->searchable()
                             ->createOptionForm([

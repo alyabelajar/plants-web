@@ -13,7 +13,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\MarkdownEditor;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 use Filament\Resources\RelationManagers\RelationManager;
 
 class CategoryRelationManager extends RelationManager
