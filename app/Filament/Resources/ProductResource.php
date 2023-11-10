@@ -59,7 +59,15 @@ class ProductResource extends Resource
                         Select::make('category_id')
                             ->relationship(name: 'category', titleAttribute: 'name')
                             ->preload()
-                            ->searchable(),
+                            ->searchable()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name'),
+                                Forms\Components\TextInput::make('slug')
+                                    ->disabled(),
+                                Forms\Components\Toggle::make('is_visible'),
+                                Forms\Components\MarkdownEditor::make('description')
+
+                            ])->createOptionModalHeading('Create Category'),
                         SpatieMediaLibraryFileUpload::make('product')
                             ->collection('product')
                             ->maxSize(2048)
