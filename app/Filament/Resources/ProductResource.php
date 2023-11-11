@@ -75,6 +75,7 @@ class ProductResource extends Resource
                         SpatieMediaLibraryFileUpload::make('product')
                             ->collection('product')
                             ->maxSize(2048)
+                            ->conversion('product')
                             ->columnSpanFull(),
                         MarkdownEditor::make('description')
                             ->columnSpanFull(),
@@ -91,15 +92,15 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                ->wrap()
-                ->description(fn (Product $record) => $record?->description)
-                ->searchable(),
-            TextColumn::make('price')->money(fn (string $state) => "Rp." . number_format($state, 2, ",", ".")),
-            SpatieMediaLibraryImageColumn::make('product')
-                ->collection('product')
-                ->width(60)
-                ->height(60)
-                ->extraImgAttributes(['class' => 'rounded']),
+                    ->wrap()
+                    ->description(fn (Product $record) => $record?->description)
+                    ->searchable(),
+                TextColumn::make('price')->money(fn (string $state) => "Rp." . number_format($state, 2, ",", ".")),
+                SpatieMediaLibraryImageColumn::make('product')
+                    ->collection('product')
+                    ->width(60)
+                    ->height(60)
+                    ->extraImgAttributes(['class' => 'rounded']),
             ])
             ->filters([
                 //
