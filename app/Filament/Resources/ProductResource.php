@@ -100,7 +100,7 @@ class ProductResource extends Resource
                     ->collection('product')
                     ->width(60)
                     ->height(60)
-                    ->circular()
+                    ->extraImgAttributes(['class' => 'rounded']),
             ])
             ->filters([
                 //
