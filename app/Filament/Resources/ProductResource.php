@@ -75,6 +75,7 @@ class ProductResource extends Resource
                         SpatieMediaLibraryFileUpload::make('product')
                             ->collection('product')
                             ->maxSize(2048)
+                            ->conversion('product')
                             ->columnSpanFull(),
                         MarkdownEditor::make('description')
                             ->columnSpanFull(),
@@ -97,8 +98,9 @@ class ProductResource extends Resource
                 TextColumn::make('price')->money(fn (string $state) => "Rp." . number_format($state, 2, ",", ".")),
                 SpatieMediaLibraryImageColumn::make('product')
                     ->collection('product')
-                    ->width(234)
-                    ->height(234),
+                    ->width(60)
+                    ->height(60)
+                    ->circular()
             ])
             ->filters([
                 //

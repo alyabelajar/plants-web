@@ -19,9 +19,10 @@ class Product extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 234, 234)
-            ->nonQueued();
+            ->addMediaConversion('product')
+            ->keepOriginalImageFormat()
+            ->width(100);
+
     }
 
     public function products()
