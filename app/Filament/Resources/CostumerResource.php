@@ -46,7 +46,7 @@ class CostumerResource extends Resource
                             ->prefixIcon('heroicon-m-identification'),
 
                         TextInput::make('email')
-                            ->unique()
+                            ->unique(ignoreRecord: true)
                             ->email()
                             ->prefixIcon('heroicon-m-envelope'),
                         TextInput::make('phone')
