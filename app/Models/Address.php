@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'country', 'street', 'city'
+    ];
+
+    public function costumers()
+    {
+        return $this->morphedByMany(Costumer::class, 'addressable');
+    }
 }
