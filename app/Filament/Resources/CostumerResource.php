@@ -20,6 +20,7 @@ use Filament\Forms\Components\Placeholder;
 use App\Filament\Resources\CostumerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CostumerResource\RelationManagers;
+use App\Filament\Resources\CostumerResource\RelationManagers\AddressesRelationManager;
 
 class CostumerResource extends Resource
 {
@@ -95,7 +96,7 @@ class CostumerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressesRelationManager::class,
         ];
     }
 
