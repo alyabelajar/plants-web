@@ -59,14 +59,14 @@ class CostumerResource extends Resource
                             ->native(false),
                     ])
                     ->columns(2)
-                    ->columnSpan(['lg' => fn(?Costumer $record)=>$record === null? 3 :2]),
+                    ->columnSpan(['lg' => fn (?Costumer $record) => $record === null ? 3 : 2]),
 
                 Section::make()
                     ->schema([
                         Placeholder::make('Created at')
                             ->content(fn (Costumer $record): ?string => $record->created_at->diffForHumans()),
                         Placeholder::make('Updated at')
-                        ->content(fn (Costumer $record): ?string => $record->updated_at->diffForHumans()),
+                            ->content(fn (Costumer $record): ?string => $record->updated_at->diffForHumans()),
                     ])
                     ->columnSpan(['lg' => 1])
                     ->visibleOn('edit')
@@ -79,12 +79,18 @@ class CostumerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('phone'),
+                TextColumn::make('addresses.street')
+                    ->label('Address')
+                    ->searchable()
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
