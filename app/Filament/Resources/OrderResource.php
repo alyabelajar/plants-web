@@ -27,14 +27,14 @@ class OrderResource extends Resource
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
-{
-    return static::getModel()::count();
-}
+    {
+        return static::getModel()::count();
+    }
 
-public static function getNavigationBadgeColor(): ?string
-{
-    return static::getModel()::count() <= 0 ? 'gray' : 'primary';
-}
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() <= 0 ? 'gray' : 'primary';
+    }
 
 
 
@@ -43,9 +43,7 @@ public static function getNavigationBadgeColor(): ?string
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+            ->schema([]);
     }
 
     public static function table(Table $table): Table
