@@ -41,7 +41,7 @@ class CostumerResource extends Resource
 
                 Section::make()
                     ->schema([
-                        TextInput::make('name')
+                        TextInput::make('nama')
                             ->required()
                             ->prefixIcon('heroicon-m-identification'),
 

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignIdFor(Costumer::class)->constrained();
             $table->foreignIdFor(Product::class)->constrained();
             $table->string('number', 32)->unique();
-            $table->decimal('total_price', 12, 2)->nullable();
             $table->string('status');
-            $table->decimal('shipping_price')->nullable();
+            $table->decimal('total_price', 12)->nullable();
+            $table->integer('qty')->nullable();
             $table->string('shipping_method')->nullable();
             $table->text('notes')->nullable();
 

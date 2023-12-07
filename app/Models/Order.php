@@ -14,15 +14,17 @@ class Order extends Model
 {
     use HasFactory, InteractsWithMedia;
 
+    protected $fillable = ['costumer_id', 'product_id', 'number', 'status', 'total_price', 'qty', 'shipping_method', 'notes'];
+
 
     protected $casts = [
         'status' => OrderStatus::class
     ];
 
 
-    public function customer(): BelongsTo
+    public function costumer()
     {
-        return $this->belongsTo(Costumer::class);
+        return $this->belongsTo(Costumer::class, 'costumer_id');
     }
 
     public function product(): BelongsTo

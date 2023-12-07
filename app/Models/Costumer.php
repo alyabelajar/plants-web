@@ -11,7 +11,7 @@ class Costumer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'gender', 'phone', 'birthday'];
+    protected $fillable = ['nama', 'email', 'gender', 'phone', 'birthday'];
 
     public function addresses(): MorphToMany
     {
